@@ -95,10 +95,16 @@ class Rule_Generator implements Generator {
 		$max      = Social_Config::max_hashtags( 'x' );
 		$hashtags = [];
 
-		$tags = get_the_tags( $post->ID );
+		$keyword = $this->get_primary_keyword( $post );
 
-		if ( ! empty( $tags ) ) {
-			$hashtags[] = Text_Utils::to_pascal_case( $tags[0]->name );
+		if ( '' !== $keyword ) {
+			$hashtags[] = Text_Utils::to_pascal_case( $keyword );
+		} else {
+			$tags = get_the_tags( $post->ID );
+
+			if ( ! empty( $tags ) ) {
+				$hashtags[] = Text_Utils::to_pascal_case( $tags[0]->name );
+			}
 		}
 
 		if ( '' !== $category_name ) {
@@ -108,6 +114,29 @@ class Rule_Generator implements Generator {
 		$hashtags = array_values( array_unique( array_filter( $hashtags ) ) );
 
 		return array_slice( $hashtags, 0, $max );
+	}
+
+	/**
+	 * Reaproveita a palavra-chave principal de um plugin de SEO (Yoast,
+	 * Rank Math ou qualquer outro via o filtro skbm_primary_keyword), em vez
+	 * de aproximar com a primeira tag. Nenhum desses plugins é obrigatório:
+	 * sem eles, build_hashtags() cai no fallback da primeira tag.
+	 */
+	protected function get_primary_keyword( \WP_Post $post ) {
+		$keyword = get_post_meta( $post->ID, '_yoast_wpseo_focuskw', true );
+
+		if ( empty( $keyword ) ) {
+			$rank_math_keyword = get_post_meta( $post->ID, 'rank_math_focus_keyword', true );
+
+			if ( ! empty( $rank_math_keyword ) ) {
+				$parts   = explode( ',', $rank_math_keyword );
+				$keyword = trim( $parts[0] );
+			}
+		}
+
+		$keyword = apply_filters( 'skbm_primary_keyword', $keyword, $post );
+
+		return is_string( $keyword ) ? trim( $keyword ) : '';
 	}
 
 	protected function build_caption( \WP_Post $post, $url, $category_name, array $hashtags, $limit ) {

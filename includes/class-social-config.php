@@ -71,4 +71,20 @@ class Social_Config {
 
 		return apply_filters( 'skbm_enabled_post_types', $saved );
 	}
+
+	/**
+	 * Detecta um plugin de SEO conhecido que já gera palavra-chave principal
+	 * (Yoast SEO, Rank Math, All in One SEO, SEOPress, The SEO Framework).
+	 * Usado só para decidir se mostra a dica na tela de configurações — o
+	 * Social Kit nunca depende de nenhum deles (fallback: primeira tag).
+	 */
+	public static function seo_plugin_active() {
+		$active = defined( 'WPSEO_VERSION' )
+			|| defined( 'RANK_MATH_VERSION' )
+			|| defined( 'AIOSEO_VERSION' )
+			|| defined( 'SEOPRESS_VERSION' )
+			|| function_exists( 'the_seo_framework' );
+
+		return (bool) apply_filters( 'skbm_seo_plugin_active', $active );
+	}
 }

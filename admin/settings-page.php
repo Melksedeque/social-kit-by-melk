@@ -1,7 +1,8 @@
 <?php
 /**
  * Template da tela Configurações > Social Kit.
- * Variáveis disponíveis: $enabled (array), $post_types (array de WP_Post_Type).
+ * Variáveis disponíveis: $enabled (array), $post_types (array de WP_Post_Type),
+ * $seo_plugin_active (bool).
  * Renderizado via require dentro de Admin::render_settings_page(), então $this é a instância de Admin.
  */
 
@@ -9,6 +10,15 @@ defined( 'ABSPATH' ) || exit;
 ?>
 <div class="wrap skbm-settings">
 	<h1><?php esc_html_e( 'Social Kit by Melk', 'social-kit-by-melk' ); ?></h1>
+
+	<?php if ( ! $seo_plugin_active ) : ?>
+		<div class="notice notice-info inline skbm-seo-notice">
+			<p>
+				<strong><?php esc_html_e( 'Dica:', 'social-kit-by-melk' ); ?></strong>
+				<?php esc_html_e( 'O Social Kit funciona melhor com o apoio de um plugin de SEO (Yoast SEO, Rank Math ou equivalente). Quando um deles já define a palavra-chave principal do post, o Social Kit reaproveita essa palavra-chave nas hashtags, em vez de aproximar com a primeira tag do post. Nenhum deles é obrigatório — sem eles, o Social Kit continua funcionando normalmente com o fallback da primeira tag.', 'social-kit-by-melk' ); ?>
+			</p>
+		</div>
+	<?php endif; ?>
 
 	<form method="post" action="options.php">
 		<?php settings_fields( 'skbm_settings' ); ?>

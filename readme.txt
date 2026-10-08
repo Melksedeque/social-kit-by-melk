@@ -51,6 +51,10 @@ Não, por enquanto. Esta versão gera os textos e disponibiliza um botão "Abrir
 
 Sim, via os filtros `skbm_label_map`, `skbm_cta_map`, `skbm_cta_trim_list`, `skbm_stopwords` e `skbm_networks`.
 
+= Preciso de um plugin de SEO (Yoast, Rank Math...) para usar este plugin? =
+
+Não. Sem um plugin de SEO ativo, a primeira hashtag usa a primeira tag do post como aproximação. Se você já usa Yoast SEO, Rank Math ou outro plugin que defina a palavra-chave principal do post, o Social Kit reaproveita essa palavra-chave automaticamente — sem nenhuma configuração adicional, e sem exigir nenhum deles.
+
 == Screenshots ==
 
 1. Painel "Social Kit" no editor, com os campos gerados e contador de caracteres.

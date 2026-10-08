@@ -8,3 +8,4 @@
 - Trava manual (`_skbm_locked`) para impedir que a regeneração automática sobrescreva edições feitas à mão.
 - Integração opcional com o URL Shortener by Melk (via `urlshbym_get_short_url_for_post()`), com fallback para o permalink quando o outro plugin não está ativo.
 - Tela de configurações (`Configurações > Social Kit`) para escolher os tipos de conteúdo habilitados, com seção "Outros plugins by Melk".
+- Reaproveitamento da palavra-chave principal do Yoast SEO ou Rank Math (quando um deles está ativo) na primeira hashtag, via filtro `skbm_primary_keyword`; fallback para a primeira tag do post quando nenhum plugin de SEO está ativo. Aviso discreto na tela de configurações sugerindo um plugin de SEO, sem exigir nenhum.

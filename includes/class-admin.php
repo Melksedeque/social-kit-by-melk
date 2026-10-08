@@ -61,8 +61,9 @@ class Admin {
 	}
 
 	public function render_settings_page() {
-		$enabled    = Social_Config::enabled_post_types();
-		$post_types = get_post_types( [ 'public' => true ], 'objects' );
+		$enabled           = Social_Config::enabled_post_types();
+		$post_types        = get_post_types( [ 'public' => true ], 'objects' );
+		$seo_plugin_active = Social_Config::seo_plugin_active();
 
 		require SKBM_PLUGIN_DIR . 'admin/settings-page.php';
 	}
