@@ -29,3 +29,9 @@
 	gap: 8px;
 	margin-top: 12px;
 }
+
+.skbm-panel-error {
+	color: #d63638;
+	font-size: 12px;
+	margin: 8px 0 0;
+}

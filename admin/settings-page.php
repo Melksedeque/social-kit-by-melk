@@ -60,7 +60,7 @@ defined( 'ABSPATH' ) || exit;
 					<h3><?php echo esc_html( $plugin['name'] ); ?></h3>
 					<p><?php echo esc_html( $plugin['description'] ); ?></p>
 					<a href="<?php echo esc_url( $plugin['url'] ); ?>" target="_blank" rel="noopener noreferrer">
-						<?php esc_html_e( 'Ver no GitHub', 'social-kit-by-melk' ); ?> &rarr;
+						<?php esc_html_e( 'Ver no WordPress.org', 'social-kit-by-melk' ); ?> &rarr;
 					</a>
 				</div>
 			<?php endforeach; ?>

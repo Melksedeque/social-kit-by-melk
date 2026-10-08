@@ -73,7 +73,7 @@ class Admin {
 			[
 				'name'        => 'URL Shortener by Melk',
 				'description' => __( 'Gera URLs curtas para seus posts automaticamente. Instale-o e o Social Kit passa a usar o link curto nas legendas automaticamente — sem configuração adicional.', 'social-kit-by-melk' ),
-				'url'         => 'https://github.com/Melksedeque/url-shortener',
+				'url'         => 'https://wordpress.org/plugins/url-shortener-by-melk/',
 			],
 		];
 

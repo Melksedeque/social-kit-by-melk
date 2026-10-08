@@ -4,7 +4,7 @@
  * Plugin URI:        https://github.com/Melksedeque/social-kit-by-melk
  * Description:       Gera automaticamente título, texto e legenda para divulgar seus posts nas redes sociais (começando pelo X), com contador de caracteres e painel no editor.
  * Version:           1.0.0
- * Requires at least: 5.3
+ * Requires at least: 6.2
  * Requires PHP:      7.4
  * Author:            Melk
  * Author URI:        https://github.com/Melksedeque

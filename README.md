@@ -4,14 +4,14 @@ Plugin WordPress leve, eficiente e seguro que gera automaticamente — ao salvar
 
 ## Por que existe
 
-Nasceu como uma feature ("Social Kit Beta") dentro do [URL Shortener by Melk](https://github.com/Melksedeque/url-shortener), mas foi extraído antes de qualquer publicação: misturar "encurtar URL" com "gerar conteúdo social" confundia o escopo de um plugin focado só em links curtos. Agora é um produto próprio, com seu próprio roadmap.
+Nasceu como uma feature ("Social Kit Beta") dentro do [URL Shortener by Melk](https://wordpress.org/plugins/url-shortener-by-melk/), mas foi extraído antes de qualquer publicação: misturar "encurtar URL" com "gerar conteúdo social" confundia o escopo de um plugin focado só em links curtos. Agora é um produto próprio, com seu próprio roadmap.
 
 ## Recursos (Fase 1 — MVP)
 
 - Geração automática (regras determinísticas, sem IA) ao salvar/publicar o post.
 - Painel próprio no editor (Gutenberg) com contador de caracteres, botões de copiar e "Abrir no X".
 - Edição manual de um campo trava a regeneração automática dele (`_skbm_locked`), sem perder o ajuste.
-- Integração **opcional** com o [URL Shortener by Melk](https://github.com/Melksedeque/url-shortener): usa o link curto automaticamente se o outro plugin estiver ativo; senão, usa o permalink normal. Nenhuma dependência obrigatória.
+- Integração **opcional** com o [URL Shortener by Melk](https://wordpress.org/plugins/url-shortener-by-melk/): usa o link curto automaticamente se o outro plugin estiver ativo; senão, usa o permalink normal. Nenhuma dependência obrigatória.
 - Rótulos, CTAs, hashtags e stopwords configuráveis via filtros `skbm_*` — nada hardcoded para um nicho.
 - Opt-in por tipo de conteúdo (`Configurações > Social Kit`).
 
@@ -26,7 +26,7 @@ Nasceu como uma feature ("Social Kit Beta") dentro do [URL Shortener by Melk](ht
 
 ## Requisitos
 
-- WordPress 5.3+
+- WordPress 6.2+
 - PHP 7.4+
 
 ## Licença

@@ -1,8 +1,8 @@
 === Social Kit by Melk ===
 Contributors: melksedeque
 Tags: social media, x, twitter, content generation, gutenberg
-Requires at least: 5.3
-Tested up to: 6.7
+Requires at least: 6.2
+Tested up to: 7.1
 Requires PHP: 7.4
 Stable tag: 1.0.0
 License: GPLv3 or later

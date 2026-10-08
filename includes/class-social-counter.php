@@ -4,8 +4,12 @@ namespace Melk\SocialKitByMelk;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Contagem ponderada de caracteres igual à do X: URL = 23, CJK/emoji = 2,
- * qualquer outro caractere (incluindo quebra de linha) = 1.
+ * Contagem ponderada de caracteres igual à do X (regras do twitter-text v3):
+ * - qualquer URL conta 23;
+ * - cada emoji (inclusive sequências com ZWJ, tons de pele e bandeiras) conta 2;
+ * - caracteres nas faixas Unicode "leves" abaixo contam 1 (inclui letras latinas
+ *   acentuadas, cirílico, grego e a quebra de linha);
+ * - qualquer outro caractere (CJK, "…", símbolos etc.) conta 2.
  *
  * A mesma lógica existe em assets/js/social-panel.js para o painel do editor.
  */
@@ -13,60 +17,76 @@ class Social_Counter {
 
 	const URL_WEIGHT = 23;
 
-	protected static $double_width_ranges = [
-		[ 0x1100, 0x115F ],
-		[ 0x2E80, 0xA4CF ],
-		[ 0xAC00, 0xD7A3 ],
-		[ 0xF900, 0xFAFF ],
-		[ 0xFF00, 0xFF60 ],
-		[ 0xFFE0, 0xFFE6 ],
-		[ 0x2600, 0x27BF ],
-		[ 0x1F1E6, 0x1F1FF ],
-		[ 0x1F300, 0x1FAFF ],
+	/**
+	 * Faixas [início, fim] de pontos de código com peso 1. Todo o resto pesa 2.
+	 */
+	protected static $single_weight_ranges = [
+		[ 0x0000, 0x10FF ],
+		[ 0x2000, 0x200D ],
+		[ 0x2010, 0x201F ],
+		[ 0x2032, 0x2037 ],
 	];
+
+	/**
+	 * Um emoji (ou sequência) inteiro vira um único item de peso 2: bandeira
+	 * (2 indicadores regionais) ou base + modificadores unidos por ZWJ.
+	 */
+	const EMOJI_PATTERN = '/(?:[\x{1F1E6}-\x{1F1FF}]{2}|[\x{2600}-\x{27BF}\x{2B00}-\x{2BFF}\x{1F300}-\x{1FAFF}][\x{FE0F}\x{1F3FB}-\x{1F3FF}]*(?:\x{200D}[\x{2600}-\x{27BF}\x{2B00}-\x{2BFF}\x{1F300}-\x{1FAFF}][\x{FE0F}\x{1F3FB}-\x{1F3FF}]*)*)/u';
+
+	const URL_PATTERN = '#https?://[^\s]+#iu';
 
 	public static function count( $text ) {
 		$text = (string) $text;
 
-		$url_pattern = '#https?://[^\s]+#iu';
-		preg_match_all( $url_pattern, $text, $urls );
+		preg_match_all( self::URL_PATTERN, $text, $urls );
 		$url_count = isset( $urls[0] ) ? count( $urls[0] ) : 0;
+		$text      = preg_replace( self::URL_PATTERN, '', $text );
 
-		$without_urls = preg_replace( $url_pattern, '', $text );
-		$chars        = preg_split( '//u', $without_urls, -1, PREG_SPLIT_NO_EMPTY );
+		$emoji_count = (int) preg_match_all( self::EMOJI_PATTERN, $text );
+		$text        = preg_replace( self::EMOJI_PATTERN, '', $text );
 
+		$chars  = preg_split( '//u', (string) $text, -1, PREG_SPLIT_NO_EMPTY );
 		$length = 0;
 
-		foreach ( $chars as $char ) {
-			$length += self::is_double_width( $char ) ? 2 : 1;
+		if ( false === $chars ) {
+			$chars = [];
 		}
 
-		return $length + ( $url_count * self::URL_WEIGHT );
+		foreach ( $chars as $char ) {
+			$length += self::char_weight( $char );
+		}
+
+		return $length + ( $emoji_count * 2 ) + ( $url_count * self::URL_WEIGHT );
 	}
 
-	protected static function is_double_width( $char ) {
+	protected static function char_weight( $char ) {
 		$code = self::codepoint( $char );
 
-		if ( null === $code ) {
-			return false;
-		}
-
-		foreach ( self::$double_width_ranges as $range ) {
+		foreach ( self::$single_weight_ranges as $range ) {
 			if ( $code >= $range[0] && $code <= $range[1] ) {
-				return true;
+				return 1;
 			}
 		}
 
-		return false;
+		return 2;
 	}
 
 	protected static function codepoint( $char ) {
-		$converted = @mb_convert_encoding( $char, 'UTF-32BE', 'UTF-8' );
+		$bytes = unpack( 'C*', $char );
+		$first = $bytes[1];
 
-		if ( false === $converted || '' === $converted ) {
-			return null;
+		if ( $first < 0x80 ) {
+			return $first;
 		}
 
-		return hexdec( bin2hex( $converted ) );
+		if ( $first < 0xE0 ) {
+			return ( ( $first & 0x1F ) << 6 ) | ( $bytes[2] & 0x3F );
+		}
+
+		if ( $first < 0xF0 ) {
+			return ( ( $first & 0x0F ) << 12 ) | ( ( $bytes[2] & 0x3F ) << 6 ) | ( $bytes[3] & 0x3F );
+		}
+
+		return ( ( $first & 0x07 ) << 18 ) | ( ( $bytes[2] & 0x3F ) << 12 ) | ( ( $bytes[3] & 0x3F ) << 6 ) | ( $bytes[4] & 0x3F );
 	}
 }

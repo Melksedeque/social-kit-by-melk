@@ -13,15 +13,17 @@ defined( 'ABSPATH' ) || exit;
  */
 class Rule_Generator implements Generator {
 
-	public function generate( \WP_Post $post, $url ) {
+	public function generate( \WP_Post $post, $url, array $overrides = [] ) {
 		$limits = Social_Config::limits( 'x' );
 
 		$category_name = $this->get_primary_category_name( $post );
 		$label         = $this->build_label( $category_name, $limits['label'] );
-		$card_title    = $this->build_card_title( $post, $limits['card_title'] );
+		$subject       = $this->input( $post, 'subject', $overrides );
+		$hook          = $this->input( $post, 'hook', $overrides );
+		$card_title    = $this->build_card_title( $post, $limits['card_title'], $subject );
 		$card_text     = $this->build_card_text( $post, $limits['card_text'] );
 		$hashtags      = $this->build_hashtags( $post, $category_name );
-		$caption       = $this->build_caption( $post, $url, $category_name, $hashtags, $limits['caption'] );
+		$caption       = $this->build_caption( $post, $url, $category_name, $hashtags, $limits['caption'], $hook );
 
 		return [
 			'label'      => $label,
@@ -30,6 +32,18 @@ class Rule_Generator implements Generator {
 			'caption_x'  => $caption,
 			'hashtags'   => $hashtags,
 		];
+	}
+
+	/**
+	 * Lê um campo de entrada (subject/hook): o override recebido tem prioridade
+	 * sobre o meta salvo, sem gravar nada no banco.
+	 */
+	protected function input( \WP_Post $post, $key, array $overrides ) {
+		if ( array_key_exists( $key, $overrides ) ) {
+			return trim( (string) $overrides[ $key ] );
+		}
+
+		return trim( (string) get_post_meta( $post->ID, '_skbm_' . $key, true ) );
 	}
 
 	protected function get_primary_category_name( \WP_Post $post ) {
@@ -63,9 +77,8 @@ class Rule_Generator implements Generator {
 		return Text_Utils::truncate_words( mb_strtoupper( $label ), $limit );
 	}
 
-	protected function build_card_title( \WP_Post $post, $limit ) {
-		$subject = get_post_meta( $post->ID, '_skbm_subject', true );
-		$base    = '' !== trim( (string) $subject ) ? $subject : $post->post_title;
+	protected function build_card_title( \WP_Post $post, $limit, $subject = '' ) {
+		$base = '' !== $subject ? $subject : $post->post_title;
 
 		return Text_Utils::truncate_words( wp_strip_all_tags( $base ), $limit );
 	}
@@ -139,8 +152,7 @@ class Rule_Generator implements Generator {
 		return is_string( $keyword ) ? trim( $keyword ) : '';
 	}
 
-	protected function build_caption( \WP_Post $post, $url, $category_name, array $hashtags, $limit ) {
-		$hook      = trim( (string) get_post_meta( $post->ID, '_skbm_hook', true ) );
+	protected function build_caption( \WP_Post $post, $url, $category_name, array $hashtags, $limit, $hook = '' ) {
 		$excerpt   = $this->get_excerpt( $post );
 		$sentences = Text_Utils::split_sentences( $excerpt );
 
