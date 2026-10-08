@@ -32,3 +32,7 @@ Nasceu como uma feature ("Social Kit Beta") dentro do [URL Shortener by Melk](ht
 ## Licença
 
 GPLv3 — veja [LICENSE](LICENSE).
+
+---
+
+Developed by [Melksedeque Silva](https://github.com/Melksedeque).
