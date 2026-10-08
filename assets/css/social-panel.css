@@ -1,0 +1,31 @@
+.skbm-panel-field {
+	margin-bottom: 16px;
+}
+
+.skbm-panel-field__counter {
+	font-size: 12px;
+	margin-top: 4px;
+}
+
+.skbm-panel-field__counter--ok {
+	color: #646970;
+}
+
+.skbm-panel-field__counter--warning {
+	color: #b45309;
+}
+
+.skbm-panel-field__counter--danger {
+	color: #d63638;
+}
+
+.skbm-panel-field__copy {
+	margin-top: 6px;
+}
+
+.skbm-panel-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 12px;
+}
