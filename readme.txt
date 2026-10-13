@@ -20,9 +20,15 @@ Nothing is locked into fixed text: the labels, CTAs, hashtags and stopwords used
 
 * Automatic generation when saving or publishing the post (card title, card text, caption and hashtags)
 * Dedicated panel in the editor (Gutenberg) with a character counter, copy buttons and an "Open in X" button
-* Manually editing a field locks the automatic regeneration of that field, so your adjustments are never overwritten
+* Manually editing a field locks the automatic regeneration for that post, so your adjustments are never overwritten (you can unlock it at any time)
 * Optional integration with URL Shortener by Melk (uses the short link automatically if the other plugin is active); without it, the regular post link is used
 * Choose which post types (posts, pages, custom post types) have the feature enabled
+* Character counter that follows the X rules (links count as 23, emojis as 2), so the caption fits before you post
+* Translated into Brazilian Portuguese (pt_BR)
+
+**Privacy**
+
+Social Kit does not use external services, does not track visitors or users and does not send any data anywhere. Everything is generated on your own server by fixed rules, with no AI and no API calls. The "Open in X" button only opens a new browser tab on x.com with the caption pre-filled, and only when you click it; nothing is sent before that.
 
 **Roadmap**
 
@@ -49,7 +55,7 @@ Not yet. This version generates the texts and provides an "Open in X" button tha
 
 = Can I customize the labels, CTAs and hashtags? =
 
-Yes, through the `skbm_label_map`, `skbm_cta_map`, `skbm_cta_trim_list`, `skbm_stopwords` and `skbm_networks` filters.
+Yes, through the `skbm_label_map`, `skbm_cta_map`, `skbm_cta_trim_list`, `skbm_stopwords`, `skbm_networks` and `skbm_resolve_url` filters.
 
 = Do I need an SEO plugin (Yoast, Rank Math...) to use this plugin? =
 
@@ -67,9 +73,15 @@ Nothing, by default: your settings and the fields saved in your posts are kept, 
 == Changelog ==
 
 = 1.0.0 =
-* First release: rule-based generation (no AI), editor panel, optional short link integration.
+* First release.
+* Rule-based generation of the card label, title, text and X caption when saving a post (no AI, no external services).
+* Editor panel with a character counter that follows the X rules, copy buttons and an "Open in X" button.
+* Manual edits lock the automatic regeneration for the post.
+* Optional integration with URL Shortener by Melk.
+* Settings screen to choose the enabled post types, with an opt-in "Delete all plugin data" option for when the plugin is deleted.
+* Brazilian Portuguese (pt_BR) translation included.
 
 == Upgrade Notice ==
 
 = 1.0.0 =
-First public release.
+First public release. If you also use URL Shortener by Melk, no extra setup is needed: the short link is picked up automatically.

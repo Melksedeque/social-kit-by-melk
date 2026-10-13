@@ -74,7 +74,7 @@ class Rule_Generator implements Generator {
 		$map   = Social_Config::label_map();
 		$label = isset( $map[ $category_name ] ) ? $map[ $category_name ] : $category_name;
 
-		return Text_Utils::truncate_words( mb_strtoupper( $label ), $limit );
+		return Text_Utils::truncate_words( function_exists( 'mb_strtoupper' ) ? mb_strtoupper( $label ) : strtoupper( $label ), $limit );
 	}
 
 	protected function build_card_title( \WP_Post $post, $limit, $subject = '' ) {
