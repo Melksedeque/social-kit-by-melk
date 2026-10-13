@@ -57,7 +57,7 @@ class Admin {
 			return;
 		}
 
-		wp_enqueue_style( 'skbm-admin', SKBM_PLUGIN_URL . 'assets/css/admin.css', [], SKBM_VERSION );
+		wp_enqueue_style( 'skbm-admin', SKBM_PLUGIN_URL . 'assets/css/admin.css', [], skbm_asset_version( 'assets/css/admin.css' ) );
 	}
 
 	public function render_settings_page() {
@@ -72,7 +72,7 @@ class Admin {
 		$plugins = [
 			[
 				'name'        => 'URL Shortener by Melk',
-				'description' => __( 'Gera URLs curtas para seus posts automaticamente. Instale-o e o Social Kit passa a usar o link curto nas legendas automaticamente — sem configuração adicional.', 'social-kit-by-melk' ),
+				'description' => __( 'Automatically generates short URLs for your posts. Install it and Social Kit starts using the short link in its captions automatically, with no extra setup.', 'social-kit-by-melk' ),
 				'url'         => 'https://wordpress.org/plugins/url-shortener-by-melk/',
 			],
 		];

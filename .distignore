@@ -1,0 +1,31 @@
+# Arquivos que NÃO vão para o trunk do WordPress.org nem para o zip de revisão.
+# Sintaxe: um padrão por linha; "/x" ancora na raiz; "x/" só casa diretórios;
+# "*" e "?" funcionam; sem barra, casa em qualquer nível.
+# (O diretório de assets definido em .wporg.json e o .git/.svn já são sempre ignorados.)
+
+.github
+.gitignore
+.gitattributes
+.distignore
+.wporg.json
+.vscode
+.idea
+node_modules
+_notas-internas
+
+# Testes de desenvolvimento: não vão para o plugin publicado
+/tests
+
+*.zip
+*.log
+*.ai
+*.psd
+.DS_Store
+Thumbs.db
+
+# Relatório de erros do Plugin Check
+/social-kit-by-melk-*.json
+
+# Documentação do GitHub (o WordPress.org usa o readme.txt)
+README.md
+CHANGELOG.md

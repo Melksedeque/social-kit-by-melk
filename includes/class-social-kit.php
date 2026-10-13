@@ -225,15 +225,18 @@ class Social_Kit {
 			'skbm-social-panel',
 			SKBM_PLUGIN_URL . 'assets/js/social-panel.js',
 			[ 'wp-plugins', 'wp-editor', 'wp-edit-post', 'wp-element', 'wp-components', 'wp-data', 'wp-i18n', 'wp-compose', 'wp-api-fetch' ],
-			SKBM_VERSION,
+			skbm_asset_version( 'assets/js/social-panel.js' ),
 			true
 		);
+
+		// Strings do painel (JS): carrega o JSON de tradução do language pack ou de /languages.
+		wp_set_script_translations( 'skbm-social-panel', 'social-kit-by-melk', SKBM_PLUGIN_DIR . 'languages' );
 
 		wp_enqueue_style(
 			'skbm-social-panel',
 			SKBM_PLUGIN_URL . 'assets/css/social-panel.css',
 			[],
-			SKBM_VERSION
+			skbm_asset_version( 'assets/css/social-panel.css' )
 		);
 
 		wp_localize_script( 'skbm-social-panel', 'skbmPanelData', [
@@ -286,11 +289,11 @@ class Social_Kit {
 		$post    = get_post( $post_id );
 
 		if ( ! $post ) {
-			return new \WP_Error( 'skbm_invalid_post', __( 'Post inválido.', 'social-kit-by-melk' ), [ 'status' => 404 ] );
+			return new \WP_Error( 'skbm_invalid_post', __( 'Invalid post.', 'social-kit-by-melk' ), [ 'status' => 404 ] );
 		}
 
 		if ( ! in_array( $post->post_type, Social_Config::enabled_post_types(), true ) ) {
-			return new \WP_Error( 'skbm_post_type_disabled', __( 'O Social Kit não está habilitado para este tipo de conteúdo.', 'social-kit-by-melk' ), [ 'status' => 400 ] );
+			return new \WP_Error( 'skbm_post_type_disabled', __( 'Social Kit is not enabled for this post type.', 'social-kit-by-melk' ), [ 'status' => 400 ] );
 		}
 
 		$virtual_post = clone $post;

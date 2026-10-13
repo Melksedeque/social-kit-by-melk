@@ -139,7 +139,7 @@
 					className: 'skbm-panel-field__copy',
 					onClick: onCopy,
 				},
-				copied ? __( 'Copied!', 'social-kit-by-melk' ) : __( 'Copiar', 'social-kit-by-melk' )
+				copied ? __( 'Copied!', 'social-kit-by-melk' ) : __( 'Copy', 'social-kit-by-melk' )
 			)
 		);
 	}
@@ -218,26 +218,26 @@
 			PluginDocumentSettingPanel,
 			{ name: 'skbm-social-kit', title: __( 'Social Kit', 'social-kit-by-melk' ) },
 			el( OutputField, {
-				label: __( 'Rótulo', 'social-kit-by-melk' ),
+				label: __( 'Label', 'social-kit-by-melk' ),
 				value: meta._skbm_label,
 				limit: LIMITS.label,
 				onChange: function ( value ) { updateOutput( '_skbm_label', value ); },
 			} ),
 			el( OutputField, {
-				label: __( 'Título do card', 'social-kit-by-melk' ),
+				label: __( 'Card title', 'social-kit-by-melk' ),
 				value: meta._skbm_card_title,
 				limit: LIMITS.card_title,
 				onChange: function ( value ) { updateOutput( '_skbm_card_title', value ); },
 			} ),
 			el( OutputField, {
-				label: __( 'Texto do card', 'social-kit-by-melk' ),
+				label: __( 'Card text', 'social-kit-by-melk' ),
 				value: meta._skbm_card_text,
 				limit: LIMITS.card_text,
 				multiline: true,
 				onChange: function ( value ) { updateOutput( '_skbm_card_text', value ); },
 			} ),
 			el( OutputField, {
-				label: __( 'Legenda (X)', 'social-kit-by-melk' ),
+				label: __( 'Caption (X)', 'social-kit-by-melk' ),
 				value: meta._skbm_caption_x,
 				limit: LIMITS.caption,
 				multiline: true,
@@ -245,13 +245,13 @@
 				onChange: function ( value ) { updateOutput( '_skbm_caption_x', value ); },
 			} ),
 			el( TextControl, {
-				label: __( 'Assunto (opcional, substitui o título do post no card)', 'social-kit-by-melk' ),
+				label: __( 'Subject (optional, replaces the post title on the card)', 'social-kit-by-melk' ),
 				value: meta._skbm_subject || '',
 				onChange: function ( value ) { updateInput( '_skbm_subject', value ); },
 				__nextHasNoMarginBottom: true,
 			} ),
 			el( TextControl, {
-				label: __( 'Gancho (opcional, abre a legenda)', 'social-kit-by-melk' ),
+				label: __( 'Hook (optional, opens the caption)', 'social-kit-by-melk' ),
 				value: meta._skbm_hook || '',
 				onChange: function ( value ) { updateInput( '_skbm_hook', value ); },
 				__nextHasNoMarginBottom: true,
@@ -267,9 +267,9 @@
 			el(
 				'div',
 				{ className: 'skbm-panel-actions' },
-				el( Button, { variant: 'primary', size: 'small', isBusy: busy, disabled: busy, onClick: regenerate }, __( 'Regenerar', 'social-kit-by-melk' ) ),
-				el( Button, { variant: 'secondary', size: 'small', onClick: copyAll }, __( 'Copiar tudo', 'social-kit-by-melk' ) ),
-				el( Button, { variant: 'secondary', size: 'small', onClick: openInX }, __( 'Abrir no X', 'social-kit-by-melk' ) )
+				el( Button, { variant: 'primary', size: 'small', isBusy: busy, disabled: busy, onClick: regenerate }, __( 'Regenerate', 'social-kit-by-melk' ) ),
+				el( Button, { variant: 'secondary', size: 'small', onClick: copyAll }, __( 'Copy all', 'social-kit-by-melk' ) ),
+				el( Button, { variant: 'secondary', size: 'small', onClick: openInX }, __( 'Open in X', 'social-kit-by-melk' ) )
 			)
 		);
 	}

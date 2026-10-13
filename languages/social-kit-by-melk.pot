@@ -1,0 +1,158 @@
+# Social Kit by Melk translation template.
+# Copyright (C) Melksedeque Silva
+# This file is distributed under the GPLv3 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Social Kit by Melk 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/social-kit-by-melk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: social-kit-by-melk\n"
+"X-Generator: i18n_tool.py\n"
+
+#. Plugin Name of the plugin
+#: social-kit-by-melk.php admin/settings-page.php:12
+msgid "Social Kit by Melk"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: social-kit-by-melk.php
+msgid "https://github.com/Melksedeque/social-kit-by-melk"
+msgstr ""
+
+#. Description of the plugin
+#: social-kit-by-melk.php
+msgid "Automatically generates a title, text and caption to promote your posts on social media (starting with X), with a character counter and an editor panel."
+msgstr ""
+
+#. Author of the plugin
+#: social-kit-by-melk.php
+msgid "Melk"
+msgstr ""
+
+#. Author URI of the plugin
+#: social-kit-by-melk.php
+msgid "https://github.com/Melksedeque"
+msgstr ""
+
+#: admin/settings-page.php:17
+msgid "Tip:"
+msgstr ""
+
+#: admin/settings-page.php:18
+msgid "Social Kit works best alongside an SEO plugin (Yoast SEO, Rank Math or similar). When one of them already defines the focus keyword of a post, Social Kit reuses that keyword in the hashtags instead of approximating it with the first tag. None of them is required: without one, Social Kit keeps working normally, falling back to the first tag."
+msgstr ""
+
+#: admin/settings-page.php:26
+msgid "Enabled post types"
+msgstr ""
+
+#: admin/settings-page.php:27
+msgid "Choose the post types for which Social Kit automatically generates the label, card title, card text and caption when a post is saved."
+msgstr ""
+
+#: admin/settings-page.php:42
+msgid "Enable Social Kit"
+msgstr ""
+
+#: admin/settings-page.php:56
+msgid "Other plugins by Melk"
+msgstr ""
+
+#: admin/settings-page.php:63
+msgid "View on WordPress.org"
+msgstr ""
+
+#: assets/js/social-panel.js:142
+msgid "Copied!"
+msgstr ""
+
+#: assets/js/social-panel.js:142
+msgid "Copy"
+msgstr ""
+
+#: assets/js/social-panel.js:195
+msgid "Could not regenerate. Please try again."
+msgstr ""
+
+#: assets/js/social-panel.js:219 includes/class-admin.php:31 includes/class-admin.php:32
+msgid "Social Kit"
+msgstr ""
+
+#: assets/js/social-panel.js:221
+msgid "Label"
+msgstr ""
+
+#: assets/js/social-panel.js:227
+msgid "Card title"
+msgstr ""
+
+#: assets/js/social-panel.js:233
+msgid "Card text"
+msgstr ""
+
+#: assets/js/social-panel.js:240
+msgid "Caption (X)"
+msgstr ""
+
+#: assets/js/social-panel.js:248
+msgid "Subject (optional, replaces the post title on the card)"
+msgstr ""
+
+#: assets/js/social-panel.js:254
+msgid "Hook (optional, opens the caption)"
+msgstr ""
+
+#: assets/js/social-panel.js:260
+msgid "Lock editing (keep my changes)"
+msgstr ""
+
+#: assets/js/social-panel.js:261
+msgid "When locked, saving the post does not overwrite these fields."
+msgstr ""
+
+#: assets/js/social-panel.js:270
+msgid "Regenerate"
+msgstr ""
+
+#: assets/js/social-panel.js:271
+msgid "Copy all"
+msgstr ""
+
+#: assets/js/social-panel.js:272
+msgid "Open in X"
+msgstr ""
+
+#: includes/class-admin.php:75
+msgid "Automatically generates short URLs for your posts. Install it and Social Kit starts using the short link in its captions automatically, with no extra setup."
+msgstr ""
+
+#: includes/class-social-config.php:51
+msgid "Read more"
+msgstr ""
+
+#: includes/class-social-config.php:56
+msgid "Is it worth it?"
+msgstr ""
+
+#: includes/class-social-config.php:57
+msgid "Check it out!"
+msgstr ""
+
+#: includes/class-social-config.php:58
+msgid "Learn more!"
+msgstr ""
+
+#: includes/class-social-config.php:59
+msgid "Do not miss it!"
+msgstr ""
+
+#: includes/class-social-kit.php:292
+msgid "Invalid post."
+msgstr ""
+
+#: includes/class-social-kit.php:296
+msgid "Social Kit is not enabled for this post type."
+msgstr ""

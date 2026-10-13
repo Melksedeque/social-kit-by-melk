@@ -21,6 +21,8 @@
 ### Modificado
 - Requer WordPress 6.2 ou superior; testado até o WordPress 7.1.
 - O card "Outros plugins by Melk" aponta para a página do URL Shortener no WordPress.org.
+- Textos da interface, descrição do cabeçalho e `readme.txt` passam a ter o inglês como idioma-fonte (padrão do WordPress.org); a tradução pt_BR fica em `languages/` e no translate.wordpress.org.
+- Os textos do painel do editor (JS) agora são carregados pelo sistema de tradução (`wp_set_script_translations`); antes nunca eram traduzidos.
 
 ### Adicionado
 - Filtro `skbm_resolve_url` para trocar a URL usada na legenda.

@@ -14,8 +14,8 @@ defined( 'ABSPATH' ) || exit;
 	<?php if ( ! $seo_plugin_active ) : ?>
 		<div class="notice notice-info inline skbm-seo-notice">
 			<p>
-				<strong><?php esc_html_e( 'Dica:', 'social-kit-by-melk' ); ?></strong>
-				<?php esc_html_e( 'O Social Kit funciona melhor com o apoio de um plugin de SEO (Yoast SEO, Rank Math ou equivalente). Quando um deles já define a palavra-chave principal do post, o Social Kit reaproveita essa palavra-chave nas hashtags, em vez de aproximar com a primeira tag do post. Nenhum deles é obrigatório — sem eles, o Social Kit continua funcionando normalmente com o fallback da primeira tag.', 'social-kit-by-melk' ); ?>
+				<strong><?php esc_html_e( 'Tip:', 'social-kit-by-melk' ); ?></strong>
+				<?php esc_html_e( 'Social Kit works best alongside an SEO plugin (Yoast SEO, Rank Math or similar). When one of them already defines the focus keyword of a post, Social Kit reuses that keyword in the hashtags instead of approximating it with the first tag. None of them is required: without one, Social Kit keeps working normally, falling back to the first tag.', 'social-kit-by-melk' ); ?>
 			</p>
 		</div>
 	<?php endif; ?>
@@ -23,8 +23,8 @@ defined( 'ABSPATH' ) || exit;
 	<form method="post" action="options.php">
 		<?php settings_fields( 'skbm_settings' ); ?>
 
-		<h2><?php esc_html_e( 'Tipos de conteúdo habilitados', 'social-kit-by-melk' ); ?></h2>
-		<p><?php esc_html_e( 'Escolha em quais tipos de post o Social Kit deve gerar rótulo, título, texto e legenda automaticamente ao salvar.', 'social-kit-by-melk' ); ?></p>
+		<h2><?php esc_html_e( 'Enabled post types', 'social-kit-by-melk' ); ?></h2>
+		<p><?php esc_html_e( 'Choose the post types for which Social Kit automatically generates the label, card title, card text and caption when a post is saved.', 'social-kit-by-melk' ); ?></p>
 
 		<table class="form-table" role="presentation">
 			<tbody>
@@ -39,7 +39,7 @@ defined( 'ABSPATH' ) || exit;
 								value="<?php echo esc_attr( $post_type->name ); ?>"
 								<?php checked( in_array( $post_type->name, $enabled, true ) ); ?>
 							/>
-							<?php esc_html_e( 'Habilitar Social Kit', 'social-kit-by-melk' ); ?>
+							<?php esc_html_e( 'Enable Social Kit', 'social-kit-by-melk' ); ?>
 						</label>
 					</td>
 				</tr>
@@ -53,14 +53,14 @@ defined( 'ABSPATH' ) || exit;
 	<hr />
 
 	<div class="skbm-other-plugins">
-		<h2><?php esc_html_e( 'Outros plugins by Melk', 'social-kit-by-melk' ); ?></h2>
+		<h2><?php esc_html_e( 'Other plugins by Melk', 'social-kit-by-melk' ); ?></h2>
 		<div class="skbm-other-plugins__list">
 			<?php foreach ( $this->other_plugins() as $plugin ) : ?>
 				<div class="skbm-other-plugins__card">
 					<h3><?php echo esc_html( $plugin['name'] ); ?></h3>
 					<p><?php echo esc_html( $plugin['description'] ); ?></p>
 					<a href="<?php echo esc_url( $plugin['url'] ); ?>" target="_blank" rel="noopener noreferrer">
-						<?php esc_html_e( 'Ver no WordPress.org', 'social-kit-by-melk' ); ?> &rarr;
+						<?php esc_html_e( 'View on WordPress.org', 'social-kit-by-melk' ); ?> &rarr;
 					</a>
 				</div>
 			<?php endforeach; ?>

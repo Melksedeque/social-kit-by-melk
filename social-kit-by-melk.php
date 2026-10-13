@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Social Kit by Melk
  * Plugin URI:        https://github.com/Melksedeque/social-kit-by-melk
- * Description:       Gera automaticamente título, texto e legenda para divulgar seus posts nas redes sociais (começando pelo X), com contador de caracteres e painel no editor.
+ * Description:       Automatically generates a title, text and caption to promote your posts on social media (starting with X), with a character counter and an editor panel.
  * Version:           1.0.0
  * Requires at least: 6.2
  * Requires PHP:      7.4
@@ -20,6 +20,13 @@ define( 'SKBM_VERSION', '1.0.0' );
 define( 'SKBM_PLUGIN_FILE', __FILE__ );
 define( 'SKBM_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SKBM_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+
+// Versão de um asset (CSS/JS): inclui a data de modificação do arquivo para
+// que navegador e CDN nunca sirvam uma cópia antiga em cache após uma atualização.
+function skbm_asset_version( $relative_path ) {
+	$file = SKBM_PLUGIN_DIR . ltrim( $relative_path, '/' );
+	return file_exists( $file ) ? SKBM_VERSION . '.' . filemtime( $file ) : SKBM_VERSION;
+}
 
 spl_autoload_register( function ( $class ) {
 	$prefix = 'Melk\\SocialKitByMelk\\';

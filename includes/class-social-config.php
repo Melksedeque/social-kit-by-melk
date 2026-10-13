@@ -48,15 +48,15 @@ class Social_Config {
 	}
 
 	public static function default_cta() {
-		return apply_filters( 'skbm_default_cta', __( 'Leia mais', 'social-kit-by-melk' ) . ' 👇' );
+		return apply_filters( 'skbm_default_cta', __( 'Read more', 'social-kit-by-melk' ) . ' 👇' );
 	}
 
 	public static function cta_trim_list() {
 		$default = [
-			__( 'Vale a pena?', 'social-kit-by-melk' ),
-			__( 'Confira!', 'social-kit-by-melk' ),
-			__( 'Saiba mais!', 'social-kit-by-melk' ),
-			__( 'Não perca!', 'social-kit-by-melk' ),
+			__( 'Is it worth it?', 'social-kit-by-melk' ),
+			__( 'Check it out!', 'social-kit-by-melk' ),
+			__( 'Learn more!', 'social-kit-by-melk' ),
+			__( 'Do not miss it!', 'social-kit-by-melk' ),
 		];
 
 		return apply_filters( 'skbm_cta_trim_list', $default );

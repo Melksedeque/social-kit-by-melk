@@ -9,7 +9,7 @@ $url  = 'https://exemplo.com/abc12';
 $post = skbm_test_post( [
 	'ID'           => 1,
 	'post_title'   => 'Como criar um plugin WordPress para encurtar URLs de forma simples',
-	'post_excerpt' => 'Aprenda a criar um plugin do zero. Veja cada passo com exemplos reais. Vale a pena?',
+	'post_excerpt' => 'Aprenda a criar um plugin do zero. Veja cada passo com exemplos reais. Is it worth it?',
 ] );
 
 $generator = new Rule_Generator();
@@ -18,7 +18,7 @@ $fields    = $generator->generate( $post, $url );
 skbm_assert_same( 'TUTORIAIS', $fields['label'], 'rótulo em maiúsculas' );
 skbm_assert( mb_strlen( $fields['card_title'] ) <= 30, 'título do card respeita 30' );
 skbm_assert( mb_strlen( $fields['card_text'] ) <= 170, 'texto do card respeita 170' );
-skbm_assert( false === strpos( $fields['card_text'], 'Vale a pena' ), 'CTA final removido do texto do card' );
+skbm_assert( false === strpos( $fields['card_text'], 'Is it worth it' ), 'CTA final removido do texto do card' );
 skbm_assert( Social_Counter::count( $fields['caption_x'] ) <= 280, 'legenda respeita 280 ponderados' );
 skbm_assert( false !== strpos( $fields['caption_x'], $url ), 'legenda contém a URL' );
 skbm_assert( false !== strpos( $fields['caption_x'], "\n\n" ), 'legenda mantém blocos separados por linha em branco' );

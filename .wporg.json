@@ -1,0 +1,8 @@
+{
+  "slug": "social-kit-by-melk",
+  "main_file": "social-kit-by-melk.php",
+  "version_constant": "SKBM_VERSION",
+  "readme": "readme.txt",
+  "changelog": "CHANGELOG.md",
+  "assets_dir": ".wordpress-org"
+}
