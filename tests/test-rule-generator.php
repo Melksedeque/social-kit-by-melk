@@ -54,3 +54,36 @@ $no_excerpt = skbm_test_post( [
 ] );
 $ne = $generator->generate( $no_excerpt, $url );
 skbm_assert_same( 'Primeira frase do conteúdo. Segunda frase do conteúdo.', $ne['card_text'], 'fallback para as 2 primeiras frases do conteúdo' );
+
+// Regressão (NerdWho/ArtCraft): primeiro período do resumo maior que o espaço da legenda.
+// Antes, o gancho inteiro era descartado e a legenda virava só "CTA + URL".
+$artcraft = skbm_test_post( [
+	'ID'           => 1,
+	'post_title'   => 'O fim do Monopólio da Adobe? Conheça o ArtCraft, a Suíte Open Source feita em Rust',
+	'post_excerpt' => 'Se você trabalha com design, edição de vídeo ou ilustração, provavelmente já sentiu essa dor na pele: abrir o aplicativo da Creative Cloud, encarar uma mensalidade cada vez mais salgada e, de quebra, ver o computador sofrer com softwares pesados que carregam décadas de código legado. Felizmente, uma resposta de peso finalmente começou a tomar forma.',
+] );
+$art_url     = 'https://www.nerdwho.com.br/0038W';
+$art_caption = $generator->generate( $artcraft, $art_url )['caption_x'];
+
+skbm_assert( Social_Counter::count( $art_caption ) <= 280, 'gancho longo: legenda dentro do limite' );
+skbm_assert( 0 === strpos( $art_caption, 'Se você trabalha com design' ), 'gancho longo: começa com o início do gancho (encurtado, não descartado)' );
+skbm_assert( false !== strpos( $art_caption, "👇\n\n" . $art_url ), 'gancho longo: CTA e URL preservados' );
+skbm_assert( false === strpos( $art_caption, 'código legado' ), 'gancho longo: foi realmente encurtado' );
+$first_block = explode( "\n\n", $art_caption )[0];
+skbm_assert( '.' === substr( $first_block, -1 ), 'gancho encurtado termina com ponto, sem reticências' );
+skbm_assert( Social_Counter::count( $art_caption ) > 200, 'gancho longo: aproveita o espaço disponível' );
+
+// Gancho curto e valor longo: o valor é descartado (ordem do corte), o gancho fica inteiro.
+$short_hook = skbm_test_post( [
+	'ID'           => 1,
+	'post_title'   => 'Título',
+	'post_excerpt' => 'Gancho curto. ' . str_repeat( 'Valor muito longo que não cabe. ', 12 ),
+] );
+$sh = $generator->generate( $short_hook, $url )['caption_x'];
+skbm_assert( 0 === strpos( $sh, 'Gancho curto.' ), 'gancho curto permanece inteiro' );
+skbm_assert( Social_Counter::count( $sh ) <= 280, 'gancho curto + valor longo respeita o limite' );
+
+// Sem espaço nenhum para o gancho (gancho enorme + hook gigante): cai para CTA + URL, link intacto.
+$no_room = $generator->generate( $post, $url, [ 'hook' => str_repeat( 'x', 260 ) ] )['caption_x'];
+skbm_assert( false !== strpos( $no_room, $url ), 'sem espaço: URL continua na legenda' );
+skbm_assert( Social_Counter::count( $no_room ) <= 280, 'sem espaço: continua dentro do limite' );

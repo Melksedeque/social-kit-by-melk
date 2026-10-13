@@ -18,6 +18,8 @@
 - O botão "Regenerar" não grava mais nada no banco (só devolve o resultado para o editor) e valida os parâmetros e o tipo de conteúdo.
 - Painel: usa `wp.editor` (fallback `wp.editPost`), envia só o campo alterado, mostra erro e estado de carregamento, indica e permite destravar a edição manual, e o "Copiar tudo" não repete as hashtags.
 
+- Legenda do X: quando o primeiro período do resumo é grande demais para caber nos 280 caracteres ponderados, o gancho é encurtado por palavras (terminando com ponto final, sem reticências) em vez de ser descartado. Antes, o resumo longo deixava a legenda só com o CTA e o link. O gancho só é descartado se nem 30 caracteres couberem; o link nunca é cortado.
+
 ### Modificado
 - Requer WordPress 6.2 ou superior; testado até o WordPress 7.1.
 - O card "Outros plugins by Melk" aponta para a página do URL Shortener no WordPress.org.

@@ -198,16 +198,21 @@ class Rule_Generator implements Generator {
 	}
 
 	/**
+	 * Menor tamanho (em caracteres) que um gancho encurtado pode ter. Abaixo
+	 * disso o trecho perde o sentido e é melhor descartar o gancho.
+	 */
+	const MIN_SHORTENED_HOOK_CHARS = 30;
+
+	/**
 	 * Ordem de corte da seção 7.5: hashtags -> frase de valor -> frase de
-	 * gancho (com o hook). O link nunca é cortado.
+	 * gancho (com o hook). O gancho primeiro é encurtado por palavras e só é
+	 * descartado quando nem a versão mínima cabe. O link nunca é cortado.
 	 */
 	protected function assemble_and_trim( $hook, $gancho, $valor, $cta, $url, $hashtag_text, $limit ) {
 		$attempts = [
 			[ $hook, $gancho, $valor, $cta, $hashtag_text ],
 			[ $hook, $gancho, $valor, $cta, '' ],
 			[ $hook, $gancho, '', $cta, '' ],
-			[ '', '', '', $cta, '' ],
-			[ '', '', '', '', '' ],
 		];
 
 		foreach ( $attempts as $attempt ) {
@@ -219,6 +224,54 @@ class Rule_Generator implements Generator {
 			}
 		}
 
+		$shortened = $this->shorten_hook_to_fit( $hook, $gancho, $cta, $url, $limit );
+
+		if ( '' !== $shortened ) {
+			return $this->assemble_caption( $hook, $shortened, '', $cta, $url, '' );
+		}
+
+		$fallbacks = [
+			[ $hook, $cta ],
+			[ '', $cta ],
+			[ '', '' ],
+		];
+
+		foreach ( $fallbacks as $fallback ) {
+			$caption = $this->assemble_caption( $fallback[0], '', '', $fallback[1], $url, '' );
+
+			if ( Social_Counter::count( $caption ) <= $limit ) {
+				return $caption;
+			}
+		}
+
 		return $url;
+	}
+
+	/**
+	 * Encurta o gancho por palavras até a legenda (hook + gancho + CTA + link)
+	 * caber no limite. Sem reticências: o trecho termina com ponto final,
+	 * igual ao texto do card.
+	 *
+	 * @return string Gancho encurtado, ou '' se nem o tamanho mínimo couber.
+	 */
+	protected function shorten_hook_to_fit( $hook, $gancho, $cta, $url, $limit ) {
+		$gancho = trim( $gancho );
+
+		for ( $max = mb_strlen( $gancho ) - 1; $max >= self::MIN_SHORTENED_HOOK_CHARS; $max-- ) {
+			$candidate = rtrim( Text_Utils::truncate_words( $gancho, $max ), " \t\n\r\0\x0B.,;:!?-" );
+
+			if ( mb_strlen( $candidate ) < self::MIN_SHORTENED_HOOK_CHARS ) {
+				break;
+			}
+
+			$candidate .= '.';
+			$caption    = $this->assemble_caption( $hook, $candidate, '', $cta, $url, '' );
+
+			if ( Social_Counter::count( $caption ) <= $limit ) {
+				return $candidate;
+			}
+		}
+
+		return '';
 	}
 }
