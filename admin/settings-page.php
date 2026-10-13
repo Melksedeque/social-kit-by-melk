@@ -2,7 +2,7 @@
 /**
  * Template da tela Configurações > Social Kit.
  * Variáveis disponíveis: $enabled (array), $post_types (array de WP_Post_Type),
- * $seo_plugin_active (bool).
+ * $seo_plugin_active (bool), $delete_data_on_uninstall (int, 0 ou 1).
  * Renderizado via require dentro de Admin::render_settings_page(), então $this é a instância de Admin.
  */
 
@@ -46,6 +46,26 @@ defined( 'ABSPATH' ) || exit;
 			<?php endforeach; ?>
 			</tbody>
 		</table>
+
+		<div class="skbm-danger-zone">
+			<h2><?php esc_html_e( 'Danger Zone', 'social-kit-by-melk' ); ?></h2>
+
+			<strong><?php esc_html_e( 'When the plugin is deleted', 'social-kit-by-melk' ); ?></strong>
+			<p>
+				<label>
+					<input
+						type="checkbox"
+						name="skbm_delete_data_on_uninstall"
+						value="1"
+						<?php checked( 1, $delete_data_on_uninstall ); ?>
+					/>
+					<?php esc_html_e( 'Delete all plugin data (settings and the label, title, text and caption saved in your posts)', 'social-kit-by-melk' ); ?>
+				</label>
+			</p>
+			<p class="description">
+				<?php esc_html_e( 'Only takes effect when you delete the plugin from the Plugins screen. Leave unchecked to keep your data if you reinstall the plugin.', 'social-kit-by-melk' ); ?>
+			</p>
+		</div>
 
 		<?php submit_button(); ?>
 	</form>

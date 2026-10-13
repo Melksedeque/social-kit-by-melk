@@ -16,3 +16,17 @@
 .skbm-other-plugins__card h3 {
 	margin-top: 0;
 }
+
+.skbm-danger-zone {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-left: 4px solid #d63638;
+	border-radius: 4px;
+	margin-top: 24px;
+	max-width: 760px;
+	padding: 4px 20px 12px;
+}
+
+.skbm-danger-zone h2 {
+	color: #d63638;
+}

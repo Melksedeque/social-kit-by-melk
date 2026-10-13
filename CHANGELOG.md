@@ -27,5 +27,7 @@
 - Os textos do painel do editor (JS) agora são carregados pelo sistema de tradução (`wp_set_script_translations`); antes nunca eram traduzidos.
 
 ### Adicionado
+- `uninstall.php` e a opção **"Delete all plugin data"** na Danger Zone de Configurações > Social Kit (desmarcada por padrão, para não perder dados ao reinstalar). Só tem efeito ao excluir o plugin; remove as opções `skbm_*` e os metas `_skbm_*` de todos os posts, e é compatível com multisite.
+- Rotina de upgrade (`skbm_db_version`): o hook de ativação não roda em atualizações pelo SVN, então os padrões e as migrações de dados passam a ser aplicados automaticamente quando a versão do banco muda (classe `Installer`).
 - Filtro `skbm_resolve_url` para trocar a URL usada na legenda.
 - Testes automatizados leves em `tests/` (`php tests/run.php`), sem Composer.

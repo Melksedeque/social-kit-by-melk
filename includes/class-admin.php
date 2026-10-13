@@ -42,6 +42,19 @@ class Admin {
 			'sanitize_callback' => [ $this, 'sanitize_post_types' ],
 			'default'           => [ 'post' ],
 		] );
+
+		register_setting( 'skbm_settings', 'skbm_delete_data_on_uninstall', [
+			'type'              => 'boolean',
+			'sanitize_callback' => [ $this, 'sanitize_checkbox' ],
+			'default'           => 0,
+		] );
+	}
+
+	/**
+	 * Checkbox desmarcado não é enviado no formulário: o valor chega vazio e vira 0.
+	 */
+	public function sanitize_checkbox( $value ) {
+		return empty( $value ) ? 0 : 1;
 	}
 
 	public function sanitize_post_types( $value ) {
@@ -64,6 +77,8 @@ class Admin {
 		$enabled           = Social_Config::enabled_post_types();
 		$post_types        = get_post_types( [ 'public' => true ], 'objects' );
 		$seo_plugin_active = Social_Config::seo_plugin_active();
+
+		$delete_data_on_uninstall = (int) get_option( 'skbm_delete_data_on_uninstall', 0 );
 
 		require SKBM_PLUGIN_DIR . 'admin/settings-page.php';
 	}

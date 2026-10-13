@@ -58,11 +58,27 @@ msgstr "Escolha os tipos de post para os quais o Social Kit gera automaticamente
 msgid "Enable Social Kit"
 msgstr "Ativar o Social Kit"
 
-#: admin/settings-page.php:56
+#: admin/settings-page.php:51
+msgid "Danger Zone"
+msgstr "Zona de perigo"
+
+#: admin/settings-page.php:53
+msgid "When the plugin is deleted"
+msgstr "Quando o plugin for excluído"
+
+#: admin/settings-page.php:62
+msgid "Delete all plugin data (settings and the label, title, text and caption saved in your posts)"
+msgstr "Excluir todos os dados do plugin (configurações e o rótulo, o título, o texto e a legenda salvos nos seus posts)"
+
+#: admin/settings-page.php:66
+msgid "Only takes effect when you delete the plugin from the Plugins screen. Leave unchecked to keep your data if you reinstall the plugin."
+msgstr "Só tem efeito quando você exclui o plugin na tela de Plugins. Deixe desmarcado para manter seus dados caso reinstale o plugin."
+
+#: admin/settings-page.php:76
 msgid "Other plugins by Melk"
 msgstr "Outros plugins do Melk"
 
-#: admin/settings-page.php:63
+#: admin/settings-page.php:83
 msgid "View on WordPress.org"
 msgstr "Ver no WordPress.org"
 
@@ -126,7 +142,7 @@ msgstr "Copiar tudo"
 msgid "Open in X"
 msgstr "Abrir no X"
 
-#: includes/class-admin.php:75
+#: includes/class-admin.php:90
 msgid "Automatically generates short URLs for your posts. Install it and Social Kit starts using the short link in its captions automatically, with no extra setup."
 msgstr "Gera URLs curtas automaticamente para os seus posts. Instale-o e o Social Kit passa a usar o link curto nas legendas automaticamente, sem nenhuma configuração extra."
 
@@ -150,10 +166,10 @@ msgstr "Saiba mais!"
 msgid "Do not miss it!"
 msgstr "Não perca!"
 
-#: includes/class-social-kit.php:292
+#: includes/class-social-kit.php:306
 msgid "Invalid post."
 msgstr "Post inválido."
 
-#: includes/class-social-kit.php:296
+#: includes/class-social-kit.php:310
 msgid "Social Kit is not enabled for this post type."
 msgstr "O Social Kit não está ativado para este tipo de post."

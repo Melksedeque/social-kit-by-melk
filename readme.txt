@@ -55,6 +55,10 @@ Yes, through the `skbm_label_map`, `skbm_cta_map`, `skbm_cta_trim_list`, `skbm_s
 
 No. Without an active SEO plugin, the first hashtag uses the first tag of the post as an approximation. If you already use Yoast SEO, Rank Math or another plugin that defines the focus keyword of a post, Social Kit reuses that keyword automatically, with no extra setup and without requiring any of them.
 
+= What happens to my data if I delete the plugin? =
+
+Nothing, by default: your settings and the fields saved in your posts are kept, so reinstalling the plugin picks up where you left off. To remove everything when the plugin is deleted, check "Delete all plugin data" in the Danger Zone of Settings > Social Kit before deleting it.
+
 == Screenshots ==
 
 1. "Social Kit" panel in the editor, with the generated fields and the character counter.

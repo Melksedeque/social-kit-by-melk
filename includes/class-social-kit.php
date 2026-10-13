@@ -24,6 +24,20 @@ class Social_Kit {
 	 */
 	const MULTILINE_FIELDS = [ 'card_text', 'caption_x' ];
 
+	/**
+	 * Todas as chaves de post meta que o plugin grava, com o prefixo. Usada
+	 * como referência da lista que uninstall.php apaga.
+	 *
+	 * @return string[]
+	 */
+	public static function meta_keys() {
+		$fields = array_merge( self::SINGLE_LINE_FIELDS, self::MULTILINE_FIELDS, [ 'hashtags', 'locked', 'source_hash', 'version' ] );
+
+		return array_map( function ( $field ) {
+			return self::META_PREFIX . $field;
+		}, $fields );
+	}
+
 	protected static $instance = null;
 
 	public static function instance() {
@@ -42,7 +56,7 @@ class Social_Kit {
 	}
 
 	public static function activate() {
-		add_option( 'skbm_enabled_post_types', [ 'post' ] );
+		Installer::install();
 	}
 
 	public static function deactivate() {

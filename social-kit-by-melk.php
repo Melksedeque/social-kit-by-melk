@@ -17,6 +17,8 @@
 defined( 'ABSPATH' ) || exit;
 
 define( 'SKBM_VERSION', '1.0.0' );
+// Versão do esquema de dados (opção skbm_db_version); só muda quando uma migração é necessária.
+define( 'SKBM_DB_VERSION', '1.0.0' );
 define( 'SKBM_PLUGIN_FILE', __FILE__ );
 define( 'SKBM_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SKBM_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
@@ -57,6 +59,9 @@ register_deactivation_hook( SKBM_PLUGIN_FILE, [ 'Melk\\SocialKitByMelk\\Social_K
 
 add_action( 'plugins_loaded', function () {
 	load_plugin_textdomain( 'social-kit-by-melk', false, dirname( plugin_basename( SKBM_PLUGIN_FILE ) ) . '/languages' );
+
+	// O hook de ativação não roda em atualizações; aplica as migrações pendentes.
+	\Melk\SocialKitByMelk\Installer::maybe_upgrade();
 
 	\Melk\SocialKitByMelk\Social_Kit::instance();
 	\Melk\SocialKitByMelk\Admin::instance();
